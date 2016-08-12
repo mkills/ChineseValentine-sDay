@@ -5,12 +5,13 @@
     <title>浪漫七夕</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/pageA.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
    <script src="js/main.js"></script>
   <style type="text/css">
       .character{
           width: 151px;
-          height: 191px;
+          height: 291px;
           background: url("images/boy.png") -0px -291px no-repeat;
           position: absolute;
           left: 6%;
@@ -44,8 +45,35 @@
     /*$(".button").click(function () {
      swipe.swipeTo($("#content").width()*2,5000);
     });*/
-
-
+    /*定义一个方法获取元素height和top值*/
+    var getValue=function (className) {
+        var $elem=$(''+className+'');
+        return{
+            height:$elem.height(),
+            top:$elem.position().top
+        };
+    };
+    /*路的Y轴*/
+    /*var pathY=function () {
+        var data=getValue('.a_background_middle');
+        return data.top + data.height/2;
+    }();*/
+    var data=getValue('.a_background_middle');
+    var pathY=data.top + data.height/2;
+    var  $boy=$('#boy');
+    var boyHeight=$boy.height();
+    $boy.css({
+       top:pathY-boyHeight+25
+    });
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
