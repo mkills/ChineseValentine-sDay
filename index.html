@@ -17,6 +17,52 @@
           left: 6%;
           top: 55%;
       }
+      .slowWalk{
+          /*Safari 和 Chrome*/
+          -webkit-animation-name: person-slow;
+          -webkit-animation-duration: 950ms;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-timing-function: steps(1,start);
+          /*Firefox*/
+          -moz-animation-name: person-slow;
+          -moz-animation-duration: 950ms;
+          -moz-animation-iteration-count: infinite;
+          -moz-animation-timing-function: steps(1,start);
+      }
+      @-webkit-keyframes person-slow {
+          0%{
+              background-position: -0px -291px;
+          }
+          25%{
+              background-position: -602px -0px;
+          }
+          50%{
+              background-position: -302px -291px;
+          }
+          75%{
+              background-position: -151px -291px;
+          }
+          100%{
+              background-position: -0px -291px;
+          }
+      }
+      @-moz-keyframes person-slow {
+          0%{
+              background-position: -0px -291px;
+          }
+          25%{
+                background-position: -602px -0px;
+            }
+          50%{
+                  background-position: -302px -291px;
+              }
+          75%{
+                    background-position: -151px -291px;
+                }
+          100%{
+                      background-position: -0px -291px;
+                  }
+      }
     </style>
 </head>
 <body>
@@ -35,10 +81,11 @@
         <!--第三幅画面-->
         <li>页面3</li>
     </ul>
-    <!--<div class="button">
-        <button>点击切换页面</button>
-    </div>-->
+
     <div id="boy" class="character"></div>
+    <div class="button">
+        <button>点击切换页面</button>
+    </div>
 </div>
 <script type="text/javascript">
     var swipe=swipeDiv($("#content"));
@@ -64,6 +111,9 @@
     var boyHeight=$boy.height();
     $boy.css({
        top:pathY-boyHeight+25
+    });
+    $('.button').click(function () {
+        $('#boy').addClass('slowWalk');
     });
 </script>
 </body>
