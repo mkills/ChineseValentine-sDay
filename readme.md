@@ -14,3 +14,18 @@ css3新特性应用：转换   渐变  动画 音频
 页面切换部分的代码封装
 封装，即隐藏对象的属性和实现细节，仅对外公开接口.
 页面布局与切换是一个整体，我们想调用切换的时候，并不关心其内部处理的手段，所以我们只需要提供一个可以调用的接口就可以，新建一个Swipe.js文件，内部定义一个Swipe工厂方法，内部会产生一个swipe的滑动对象，暴露了scrollTo的接口
+
+
+
+###20160812
+精灵动画的实现
+1.原理：靠不断的切换图片让人感觉视觉上不断在变化
+2.图片如果很多，加载会比较慢，会占用大量网络资源，大多数的做法就是把图片都合成一张大图再利用CSS的以下属性
+	background-image
+	background-repeat
+	background-position
+3.
+目前浏览器都不支持 @keyframes 规则。
+Firefox 支持替代的 @-moz-keyframes 规则。
+Opera 支持替代的 @-o-keyframes 规则。
+Safari 和 Chrome 支持替代的 @-webkit-keyframes 规则。
