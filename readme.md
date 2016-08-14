@@ -29,3 +29,26 @@ css3新特性应用：转换   渐变  动画 音频
 Firefox 支持替代的 @-moz-keyframes 规则。
 Opera 支持替代的 @-o-keyframes 规则。
 Safari 和 Chrome 支持替代的 @-webkit-keyframes 规则。
+
+
+###20160814
+1.男孩走路实现
+采用了CSS3的transition来修改left的值，引入了一个插件jquery.transit
+点击按钮
+ $boy.transition({
+    'left': $("#content").width() + 'px',
+}, 10000,'linear');
+
+2.男孩走路暂停
+CSS3的animation直接提供一个animation-play-state的样式来控制动画的暂停处理。
+.pauseWalk {
+   -webkit-animation-play-state: paused;
+   -moz-animation-play-state: paused;
+}
+
+$("button:last").click(function () {
+        var left=$boy.css('left');
+        $boy.css('left',left);
+        $boy.addClass("pauseWalk")
+    });
+注：暂停方法内transition强制做了一个设置left坐标的处理，达到一个暂停的效果，但是这样是有问题的，下一次的启动必须等上一次动画的时间结束

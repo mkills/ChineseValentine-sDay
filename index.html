@@ -7,62 +7,13 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/pageA.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
    <script src="js/main.js"></script>
   <style type="text/css">
-      .character{
-          width: 151px;
-          height: 291px;
-          background: url("images/boy.png") -0px -291px no-repeat;
-          position: absolute;
-          left: 6%;
-          top: 55%;
-      }
-      .slowWalk{
-          /*Safari 和 Chrome*/
-          -webkit-animation-name: person-slow;
-          -webkit-animation-duration: 950ms;
-          -webkit-animation-iteration-count: infinite;
-          -webkit-animation-timing-function: steps(1,start);
-          /*Firefox*/
-          -moz-animation-name: person-slow;
-          -moz-animation-duration: 950ms;
-          -moz-animation-iteration-count: infinite;
-          -moz-animation-timing-function: steps(1,start);
-      }
-      @-webkit-keyframes person-slow {
-          0%{
-              background-position: -0px -291px;
-          }
-          25%{
-              background-position: -602px -0px;
-          }
-          50%{
-              background-position: -302px -291px;
-          }
-          75%{
-              background-position: -151px -291px;
-          }
-          100%{
-              background-position: -0px -291px;
-          }
-      }
-      @-moz-keyframes person-slow {
-          0%{
-              background-position: -0px -291px;
-          }
-          25%{
-                background-position: -602px -0px;
-            }
-          50%{
-                  background-position: -302px -291px;
-              }
-          75%{
-                    background-position: -151px -291px;
-                }
-          100%{
-                      background-position: -0px -291px;
-                  }
-      }
+    .pauseWalk{
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+    }
     </style>
 </head>
 <body>
@@ -82,9 +33,13 @@
         <li>页面3</li>
     </ul>
 
-    <div id="boy" class="character"></div>
-    <div class="button">
+    <div id="boy" class="character slowWalk"></div>
+    <!--<div class="button">
         <button>点击切换页面</button>
+    </div>-->
+    <div class="button">
+        <button>开始</button>
+        <button>暂停</button>
     </div>
 </div>
 <script type="text/javascript">
@@ -112,8 +67,23 @@
     $boy.css({
        top:pathY-boyHeight+25
     });
-    $('.button').click(function () {
-        $('#boy').addClass('slowWalk');
+    /*点击切换页面按钮，男孩儿开始走路*/
+   /* $('.button').click(function () {
+        /!*$('#boy').addClass('slowWalk');*!/
+        $boy.transition({
+           'left':$('#content').width()+'px' 
+        },10000,'linear');
+    });*/
+    /*1.点击开始，男孩开始走路*/
+    $("button:first").click(function () {
+        $boy.addClass("slowWalk").transition(
+                {'left':$('#content').width()+'px'},15000);
+    });
+    /*2.点击暂停，男孩停下走路*/
+    $("button:last").click(function () {
+        var left=$boy.css('left');
+        $boy.css('left',left);
+        $boy.addClass("pauseWalk")
     });
 </script>
 </body>
