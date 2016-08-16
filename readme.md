@@ -52,3 +52,13 @@ $("button:last").click(function () {
         $boy.addClass("pauseWalk")
     });
 注：暂停方法内transition强制做了一个设置left坐标的处理，达到一个暂停的效果，但是这样是有问题的，下一次的启动必须等上一次动画的时间结束
+
+###20160816
+男孩路径动画处理
+小男孩不仅沿直线走 速度也会变化  进出商店 上桥等
+注：小男孩走路范围其实只有一个页面区域，因为父容器是content元素
+小男孩不管是往X还是Y轴变化，按照百分比的比例去换算实际的距离
+走到1/2的位置 ，具体的坐标值的计算就是 ： 实际X轴位置 = 0.5 * 页面宽度 ，同样Y轴的计算也是如此
+var distX = calculateDist('x', 0.5)
+var distY = calculateDist('y', 0.5)
+walkRun(10000, distX, distY)
