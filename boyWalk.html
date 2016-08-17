@@ -2,19 +2,17 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>浪漫七夕</title>
+    <title>男孩走路代码封装</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/pageA.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.transit.min.js"></script>
 
-  <style type="text/css">
-    .pauseWalk{
-        -webkit-animation-play-state: paused;
-        -moz-animation-play-state: paused;
-    }
-    </style>
+    <script src="js/main.js"></script>
+    <!--<script src="js/jquery.transit.min.js"></script>-->
+    <script src="js/swipe.js"></script>
+    <script src="js/BoyWalk.js"></script>
+
 </head>
 <body>
 <div id="content">
@@ -44,15 +42,33 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $(".button").click(function () {
+        /*$(".button").click(function () {
             var distX=caculateDistance('x',0.5);
             var distY=caculateDistance('y',0.5);
             walkRun(5000,distX,distY);
+        });*/
+        var container=$("#content");
+        var swipe=swipeDiv(container);
+        var boy=BoyWalk();
+        $("button").click(function () {
+            //开始第一次走路
+
+            boy.walkTo(2000,0.2).then(function () {
+
+                boy.setColor('red')
+            }).then(function () {
+                boy.walkTo(2000,0.4)
+            }).then(function () {
+                boy.setColor('yellow')
+            }).then(function () {
+               return boy.walkTo(2000,0.6)
+            }).then(function () {
+                boy.setColor('blue')
+            })
         });
     });
 </script>
-<script src="js/swipe.js"></script>
-<script src="js/boyMove.js"></script>
+
 </body>
 </html>
 

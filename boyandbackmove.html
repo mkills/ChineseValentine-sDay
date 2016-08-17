@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>页面与人物之间形成的视觉差效果</title>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/pageA.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <!--<script src="js/jquery.transit.min.js"></script>-->
+    <script src="js/swipe.js"></script>
+    <script src="js/BoyWalk.js"></script>
+    <style type="text/css">
+    .cloud{
+        position: absolute;
+        z-index: 2;
+    }
+        .smallCloud{
+            background: url("images/cloud1.png");
+            width: 181px;
+            height: 101px;
+            left: -5%;
+            top: 15%;
+        }
+        .bigCloud{
+            background: url("images/cloud2.png");
+            width: 301px;
+            height: 140px;
+            right: -5%;
+        }
+        .smallAnim{
+            -webkit-animation-name: cloudSmall;
+            -webkit-animation-duration: 30s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-name: cloudSmall;
+            -moz-animation-duration: 30s;
+            -moz-animation-iteration-count: infinite;
+        }
+        .bigAnim{
+            -webkit-animation-name: cloudBig;
+            -webkit-animation-duration: 30s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-name: cloudSmall;
+            -moz-animation-duration: 30s;
+            -moz-animation-iteration-count: infinite;
+        }
+        @-webkit-keyframes cloudSmall {
+            0%{
+                left: -5%;
+            }
+            100%{
+                left: 100%;
+            }
+        }
+        @-webkit-keyframes cloudBig {
+            0%{
+                right: -5%;
+            }
+            100%{
+                right: 100%;
+            }
+        }
+        @-moz-keyframes smallCloud {
+            0%{
+                left: -5%;
+            }
+            100%{
+                left: 100%;
+            }
+        }
+        @-moz-keyframes bigCloud {
+            0%{
+                right: -5%;
+            }
+            100%{
+                right: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <ul class="content_wrap">
+        <!--第一幅画面-->
+        <li>
+            <div class="a_background">
+                <div class="a_background_top"></div>
+                <div class="a_background_middle"></div>
+                <div class="a_background_bottom"></div>
+            </div>
+            <div id="sun"></div>
+            <div class="cloudArea">
+                <div class="cloud smallCloud"></div>
+                <div class="cloud bigCloud"></div>
+            </div>
+        </li>
+        <!--第二幅画面-->
+        <li>页面2</li>
+        <!--第三幅画面-->
+        <li>页面3</li>
+    </ul>
+
+    <div id="boy" class="character"></div>
+    <!--<div class="button">
+        <button>点击切换页面</button>
+    </div>-->
+    <div class="button">
+        <button>开始</button>
+        <!--<button>暂停</button>-->
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        /*$(".button").click(function () {
+            var distX=caculateDistance('x',0.5);
+            var distY=caculateDistance('y',0.5);
+            walkRun(5000,distX,distY);
+        });*/
+        var container=$("#content");
+        var swipe=swipeDiv(container);
+        function scroll(time,proportionX) {
+            var distX=container.width()*proportionX;
+            swipe.scrollTo(distX,time);
+        }
+        var boy=BoyWalk();
+        $("button").click(function () {
+            //开始第一次走路
+            $("#sun").addClass('rotation');
+            $(".cloud:first").addClass('smallAnim')
+            $(".cloud:last").addClass('bigAnim')
+            boy.walkTo(8000,0.2).then(function () {
+
+                scroll(5000,2)
+            }).then(function () {
+                return boy.walkTo(5000,0.5);
+            })
+        });
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

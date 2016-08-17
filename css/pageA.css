@@ -23,8 +23,45 @@
     background-image: url("../images/a_background_botton.png");
     background-size: 100% 100%;
 }
-
-
+/*.pauseWalk{
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+}*/
+.pauseWalk{
+    animation-play-state: paused;
+}
+/*太阳自转及动画*/
+#sun{
+    background: url("../images/sun.png") no-repeat;
+    position: absolute;
+    width: 201px;
+    height: 201px;
+    top: -30px;
+    right: 40%;
+    z-index: 1;
+}
+.rotation{
+    -webkit-animation-name: rotation;
+    -webkit-animation-duration: 30s;
+    -moz-animation-name: rotation;
+    -moz-animation-duration: 30s;
+}
+@-webkit-keyframes rotation{
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-2000px) translateY(400PX);
+    }
+}
+@-moz-keyframes  rotation{
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-2000px) translateY(400PX);
+    }
+}
 
 
 

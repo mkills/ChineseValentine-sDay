@@ -62,3 +62,72 @@ $("button:last").click(function () {
 var distX = calculateDist('x', 0.5)
 var distY = calculateDist('y', 0.5)
 walkRun(10000, distX, distY)
+
+
+###20160817
+1.JavaScript的执行流程是分为"同步"与"异步"
+ 针对这样的异步嵌套的回调逻辑，jQuery 也引入了 Promise 的概念
+ 	var dtd = $.Deferred();  //创建
+	dtd.resolve();          //成功
+	dtd.then()              //执行回调
+
+ 	dtd.then(function() {
+ 	  //操作1
+	}).then(function() {
+  	 //操作2
+	}).then(function() {
+  	//操作3
+	})
+
+
+2.问题：
+(1).	 /*var data=getValue('.a_background_middle');
+    var pathY=data.top + data.height/2;*/
+
+    var pathY=function () {
+        var data=getValue('.a_background_middle');
+        return data.top+data.height/2
+    }();
+(2).忘记写return 报错 Uncaught TypeError: Cannot read property 'then' of undefined(anonymous function)
+ //开始走路
+        walkTo:function (time,proportionX,proportionY) {
+            var distX=calculateDistance('x',proportionX)
+            var distY=calculateDistance('y',proportionY)
+            return walkRun(time,distX,distY);
+        },
+(3).忘记写return  某些效果会被覆盖
+
+$("button").click(function () {
+            //开始第一次走路
+
+            boy.walkTo(2000,0.2).then(function () {
+    （1）            boy.setColor('red')
+            }).then(function () {
+    （2）          return boy.walkTo(2000,0.4)    第一个
+            }).then(function () {
+    （3）          boy.setColor('yellow')
+            }).then(function () {
+    （4）         return boy.walkTo(2000,0.6)     第二个
+            }).then(function () {
+    （5）          boy.setColor('blue')
+            })
+        });
+
+
+4.小孩走路 同时页面背景移动 页面与人物之间形成的视觉差效果
+
+  	（1）小男孩的走路区间只是一个页面单位，相对点是父级的div
+        页面滚动只有二个页面单位，因为本身会占据一个
+     （2）小男孩如果走到中间位置，那么比例是0.5 换算下就是  0.5*页面宽度
+          页面要到中间位置就是，比例是1，换算就是 1*页面宽度
+
+
+			boy.walkTo(2000, 0.2)
+                .then(function() {
+                    // 第一次走路完成
+                    // 开始页面滚动
+                    scrollTo(5000, 1);//
+                }).then(function() {
+                    // 第二次走路
+                    return boy.walkTo(5000, 0.5);
+                });
