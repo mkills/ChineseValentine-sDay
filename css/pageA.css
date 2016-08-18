@@ -63,8 +63,72 @@
     }
 }
 
-
-
+/*大小云走动*/
+.cloud{
+    position: absolute;
+    z-index: 2;
+}
+.smallCloud{
+    background: url("../images/cloud1.png");
+    width: 181px;
+    height: 101px;
+    left: -5%;
+    top: 15%;
+}
+.bigCloud{
+    background: url("../images/cloud2.png");
+    width: 301px;
+    height: 140px;
+    right: -5%;
+}
+.smallAnim{
+    -webkit-animation-name: cloudSmall;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: cloudSmall;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+}
+.bigAnim{
+    -webkit-animation-name: cloudBig;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: cloudSmall;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+}
+@-webkit-keyframes cloudSmall {
+    0%{
+        left: -5%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+@-webkit-keyframes cloudBig {
+    0%{
+        right: -5%;
+    }
+    100%{
+        right: 100%;
+    }
+}
+@-moz-keyframes smallCloud {
+    0%{
+        left: -5%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+@-moz-keyframes bigCloud {
+    0%{
+        right: -5%;
+    }
+    100%{
+        right: 100%;
+    }
+}
 
 
 

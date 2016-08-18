@@ -1,0 +1,46 @@
+@charset "utf-8";
+/*背景图*/
+.b_background{
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/b_background_dark.png");
+    background-size: 100% 100%;
+    position: absolute;
+}
+.b_background_bright{
+    background: url("../images/b_background_bright.png") -9999px -9999px no-repeat;/*??????????*/
+}
+.lamp_bright{
+    background-image: url("../images/b_background_bright.png");
+}
+/*商店*/
+.shop{
+    width: 39.5%;
+    height: 35.5%;
+    position: absolute;
+    left: 29%;
+    top: 36.5%;
+}
+.door{
+    position: absolute;
+    width: 32%;
+    height: 68%;
+    top: 32%;
+    left: 58.5%;
+    overflow: hidden;
+}
+.door_left,.door_right{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+}
+.door_left{
+    left: 0%;
+    background: url("../images/door-left.png");
+    background-size: 100% 100%;
+}
+.door_right{
+    left: 50%;
+    background: url("../images/door-right.png");
+    background-size: 100% 100%;/*记住你总是忘写*/
+}

@@ -1,6 +1,7 @@
 /**
  * Created by xiaochuan on 2016/8/17.
  */
+var instanceX;//男孩进出商店需要移动的距离
 function BoyWalk() {
     var container=$("#content");
     /*页面可视区域的高度和宽度*/
@@ -62,6 +63,19 @@ function BoyWalk() {
        // console.log(d1);
         return d1;
     }
+    /*走进商店*/
+    function walkToShop() {
+        var defer=$.Deferred();
+        var doorObj=$('.door');
+        /*门的坐标*/
+        var offsetDoor=doorObj.offset();
+        var doorOffsetLeft=offsetDoor.left;
+      /*  男孩当前的坐标*/
+        var offsetBoy=$boy.offset();
+        var boyOffsetLeft=offsetBoy.left;
+        /*当前需要移动的坐标*/
+        instanceX=(doorOffsetLeft+doorObj.width()/2)
+    }
     return {
         //开始走路
         walkTo:function (time,proportionX,proportionY) {
@@ -75,8 +89,54 @@ function BoyWalk() {
         },
         setColor:function (value) {
             $boy.css('background-color',value);
+        },
+        toShop:function () {
+            return walkToShop();
+        },
+        outShop:function () {
+            return walkOutShop();
         }
+
 
 
     }
 }
+/*门开门关*/
+function doorAction(left,right,time) {
+    var door=$('.door');
+    var doorLeft=$('.door_left');
+    var doorRight=$('.door_right');
+    var defer=$.Deferred();
+    /*等待开门*/
+    var count=2;
+    var complete=function () {
+        if(count==1){
+            defer.resolve();
+            return;
+        }
+        count--;
+    };
+    doorLeft.transition({
+        'left':left
+    },time,complete());
+    doorRight.transition({
+        'left':right
+    },time,complete());
+    return defer;
+}
+function openDoor() {
+    return doorAction('-50%','100%',2000);
+}
+function closeDoor() {
+    return doorAction('0%','50%',2000);
+}
+/*灯亮灯暗*/
+var lamp={
+    elem:$('.b_background'),
+    bright:function () {
+        this.elem.addClass('lamp_bright')
+    },
+    dark:function () {
+        this.elem.removeClass('lamp_bright')
+    }
+};
