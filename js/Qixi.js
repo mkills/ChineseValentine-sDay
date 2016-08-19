@@ -1,6 +1,7 @@
 /**
  * Created by xiaochuan on 2016/8/17.
  */
+
 var instanceX;//男孩进出商店需要移动的距离
 function BoyWalk() {
     var container=$("#content");
@@ -64,7 +65,7 @@ function BoyWalk() {
         return d1;
     }
     /*走进商店*/
-    function walkToShop() {
+    function walkToShop(runTime) {
         var defer=$.Deferred();
         var doorObj=$('.door');
         /*门的坐标*/
@@ -74,7 +75,46 @@ function BoyWalk() {
         var offsetBoy=$boy.offset();
         var boyOffsetLeft=offsetBoy.left;
         /*当前需要移动的坐标*/
-        instanceX=(doorOffsetLeft+doorObj.width()/2)
+        instanceX=(doorOffsetLeft+doorObj.width()/2)-(boyOffsetLeft+$boy.width()/2);
+        //开始走路
+        var walkPlay=stratRun({
+            transform:'translateX('+instanceX+'px),scale(0.3,0.3)',
+            opacity:0.1
+        },2000);
+        //走路完毕
+        walkPlay.done(function () {
+            $boy.css({
+                opacity:0
+            })
+            defer.resolve();
+        })
+        return defer;
+    }
+    //走出商店
+    function  walkOutShop(runTime) {
+        var defer=$.Deferred();
+        restoreWalk();
+        //开始走路
+        var walkPlay=stratRun({
+            transform:'translateX('+instanceX+'px),scale(1,1)',
+            opacity:1
+        },runTime);
+        //走路完毕
+        walkPlay.done(function () {
+            defer.resolve();
+        });
+        return defer;
+
+    }
+    //取花
+    function takeFlower() {
+        var defer =$.Deferred();
+        setTimeout(function () {
+            //取花
+            $boy.addClass('slowFlowerWalk');
+            defer.resolve();
+        },1000);
+        return defer;
     }
     return {
         //开始走路
@@ -91,12 +131,15 @@ function BoyWalk() {
             $boy.css('background-color',value);
         },
         toShop:function () {
-            return walkToShop();
+            return walkToShop.apply(null,arguments);
         },
         outShop:function () {
-            return walkOutShop();
+            return walkOutShop.apply(null,arguments);
+        },
+        takeFlower:function () {
+            return takeFlower();
         }
-
+        
 
 
     }
@@ -131,12 +174,3 @@ function closeDoor() {
     return doorAction('0%','50%',2000);
 }
 /*灯亮灯暗*/
-var lamp={
-    elem:$('.b_background'),
-    bright:function () {
-        this.elem.addClass('lamp_bright')
-    },
-    dark:function () {
-        this.elem.removeClass('lamp_bright')
-    }
-};
