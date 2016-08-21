@@ -7,6 +7,7 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/pageA.css" rel="stylesheet">
     <link href="css/pageB.css" rel="stylesheet">
+    <link href="css/pageC.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
 
     <script src="js/main.js"></script>
@@ -74,22 +75,18 @@
         </li>
     </ul>
 
-    <div id="boy" class="character"></div>
+   <!-- <div id="boy" class="character"></div>-->
     <!--<div class="button">
         <button>点击切换页面</button>
     </div>-->
-    <div class="button">
+    <!--<div class="button">
         <button>开始</button>
-       <!-- <button>关门</button>-->
-    </div>
+       &lt;!&ndash; <button>关门</button>&ndash;&gt;
+    </div>-->
 </div>
 <script type="text/javascript">
     $(function () {
-        /*$(".button").click(function () {
-            var distX=caculateDistance('x',0.5);
-            var distY=caculateDistance('y',0.5);
-            walkRun(5000,distX,distY);
-        });*/
+
         var container=$("#content");
         var swipe=swipeDiv(container);
         /*页面滚动到指定的位置*/
@@ -98,55 +95,8 @@
             swipe.scrollTo(distX,time);
         }
 
-        swipe.scrollTo(container.width(),0);
-        var lamp={
-            elem:$('.b_background'),
-            bright:function () {
-                this.elem.addClass('lamp_bright');
-            },
-            dark:function () {
-                this.elem.removeClass('lamp_bright');
-            }
-        }
-        var boy=BoyWalk();
-        //右边鸟飞
-        var bird={
-            elem:$(".bird"),
-            fly:function () {
-                this.elem.addClass('birdFly');
-                this.elem.transition({
-                            right:container.width()
-                },15000,'linear');
-            }
-        };
-        function  startRun() {
-            boy.walkTo(2000,0.5)
-                    .then(function () {
-                        boy.stopWalk();
-                    }).then(function () {
-                        return openDoor();
-            }).then(function () {
-                lamp.bright();
-            }).then(function () {
-                return boy.toShop(2000);
-            }).then(function () {
-                return boy.takeFlower();
-            }).then(function () {
-                bird.fly();
-            }).then(function () {
-                return boy.outShop(2000);
-            }).then(function () {
-               return closeDoor();
-            }).then(function () {
-                lamp.dark()
-            }).then(function () {
-                boy.walkTo(2000,1);
-            })
-        }
-        $("button:first").click(function () {
-            
-            startRun();
-        });
+        swipe.scrollTo(container.width()*2,0);
+
         
     });
 </script>
