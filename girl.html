@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>男孩儿进出商店位置变化</title>
-    <link href="css/reset.css" rel="stylesheet">
+
     <link href="css/main.css" rel="stylesheet">
     <link href="css/pageA.css" rel="stylesheet">
     <link href="css/pageB.css" rel="stylesheet">
@@ -12,16 +12,13 @@
 
     <script src="js/main.js"></script>
     <!--<script src="js/jquery.transit.min.js"></script>-->
-    <script src="js/swipe.js"></script>
-    <script src="js/BoyWalk.js"></script>
-    <script src="js/Qixi.js"></script>
-    <style type="text/css">
 
-    </style>
+    <script src="js/BoyWalk.js"></script>
+
 </head>
 <body>
 <div id="content">
-    <ul class="content_wrap">
+    <ul class="content-wrap">
         <!--第一幅画面-->
         <li>
             <div class="a_background">
@@ -55,22 +52,25 @@
                 <div class="c_background_middle"></div>
                 <div class="c_background_bottom"></div>
             </div>
+            <!--小女孩-->
             <div class="girl"></div>
+            <!--水波-->
             <div class="bridge_bottom">
                 <div class="water">
-                    <div id="water1" class="water1"></div>
-                    <div id="water2" class="water2"></div>
-                    <div id="water3" class="water3"></div>
-                    <div id="water4" class="water4"></div>
+                    <div id="water1" class="water_1"></div>
+                    <div id="water2" class="water_2"></div>
+                    <div id="water3" class="water_3"></div>
+                    <div id="water4" class="water_4"></div>
                 </div>
             </div>
+            <!--星星-->
             <ul class="stars">
-                <li class="star1"></li>
-                <li class="star2"></li>
-                <li class="star3"></li>
-                <li class="star4"></li>
-                <li class="star5"></li>
-                <li class="star6"></li>
+                <li class="stars1"></li>
+                <li class="stars2"></li>
+                <li class="stars3"></li>
+                <li class="stars4"></li>
+                <li class="stars5"></li>
+                <li class="stars6"></li>
             </ul>
         </li>
     </ul>
@@ -84,6 +84,9 @@
        &lt;!&ndash; <button>关门</button>&ndash;&gt;
     </div>-->
 </div>
+
+
+</body>
 <script type="text/javascript">
     $(function () {
 
@@ -97,11 +100,11 @@
 
         swipe.scrollTo(container.width()*2,0);
 
-        
+
     });
 </script>
-
-</body>
+<script src="js/swipe.js"></script>
+<script src="js/Qixi.js"></script>
 </html>
 
 

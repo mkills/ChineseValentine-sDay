@@ -43,15 +43,17 @@
 .rotation{
     -webkit-animation-name: rotation;
     -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: 1;
     -moz-animation-name: rotation;
     -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: 1;
 }
 @-webkit-keyframes rotation{
     0%{
         transform: translateX(0) translateY(0);
     }
     100%{
-        transform: translateX(-2000px) translateY(400PX);
+        transform: translateX(-2000px) translateY(400px);
     }
 }
 @-moz-keyframes  rotation{
@@ -59,7 +61,7 @@
         transform: translateX(0) translateY(0);
     }
     100%{
-        transform: translateX(-2000px) translateY(400PX);
+        transform: translateX(-2000px) translateY(400px);
     }
 }
 
@@ -91,10 +93,10 @@
 }
 .bigAnim{
     -webkit-animation-name: cloudBig;
-    -webkit-animation-duration: 30s;
+    -webkit-animation-duration: 60s;
     -webkit-animation-iteration-count: infinite;
-    -moz-animation-name: cloudSmall;
-    -moz-animation-duration: 30s;
+    -moz-animation-name: cloudBig;
+    -moz-animation-duration: 60s;
     -moz-animation-iteration-count: infinite;
 }
 @-webkit-keyframes cloudSmall {
@@ -113,7 +115,7 @@
         right: 100%;
     }
 }
-@-moz-keyframes smallCloud {
+@-moz-keyframes cloudSmall {
     0%{
         left: -5%;
     }
@@ -121,7 +123,7 @@
         left: 100%;
     }
 }
-@-moz-keyframes bigCloud {
+@-moz-keyframes cloudBig {
     0%{
         right: -5%;
     }
