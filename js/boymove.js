@@ -1,6 +1,4 @@
-/**
- * Created by xiaochuan on 2016/8/16.
- */
+
 var container=$("#content");
 /*页面可视区域的高度和宽度*/
 var visualWidth=container.width();

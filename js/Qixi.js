@@ -1,22 +1,68 @@
-/**
- * Created by xiaochuan on 2016/8/17.
- */
 
+var container=$("#content");
+/*页面可视区域的高度和宽度*/
+var visualWidth=container.width();
+var visualHeight=container.height();
+var swipe=swipeDiv(container);
+/*页面滚动到指定的位置*/
+function scroll(time,proportionX) {
+    var distX=visualWidth*proportionX;
+    swipe.scrollTo(distX,time);
+}
+
+swipe.scrollTo(visualWidth*2,0);
+// alert(visualWidth+"-----"+visualHeight);
+/*定义一个方法获取元素height和top值*/
+var getValue=function (className) {
+    var $elem=$(''+className+'');
+    return{
+        height:$elem.height(),
+        top:$elem.position().top
+    };
+};
+//桥的Y轴
+var bridgeY=function () {
+    var data=getValue('.c_background_middle');
+    return data.top;
+}();
+
+
+/*门开门关*/
+function doorAction(left,right,time) {
+    var door=$('.door');
+    var doorLeft=$('.door_left');
+    var doorRight=$('.door_right');
+    var defer=$.Deferred();
+    /*等待开门*/
+    var count=2;
+    var complete=function () {
+        if(count==1){
+            defer.resolve();
+            return;
+        }
+        count--;
+    };
+    doorLeft.transition({
+        'left':left
+    },time,complete());
+    doorRight.transition({
+        'left':right
+    },time,complete());
+    return defer;
+}
+/*开门*/
+function openDoor() {
+    return doorAction('-50%','100%',2000);
+}
+/*关门*/
+function closeDoor() {
+    return doorAction('0%','50%',2000);
+}
+/*小孩走路*/
 var instanceX;//男孩进出商店需要移动的距离
 function BoyWalk() {
-    var container=$("#content");
-    /*页面可视区域的高度和宽度*/
-    var visualWidth=container.width();
-    var visualHeight=container.height();
- // alert(visualWidth+"-----"+visualHeight);
-    /*定义一个方法获取元素height和top值*/
-    var getValue=function (className) {
-        var $elem=$(''+className+'');
-        return{
-            height:$elem.height(),
-            top:$elem.position().top
-        };
-    };
+
+
     /*var data=getValue('.a_background_middle');
     var pathY=data.top + data.height/2;*/
     var pathY=function () {
@@ -32,6 +78,7 @@ function BoyWalk() {
     function pauseWalk() {
         $boy.addClass("pauseWalk");
     }
+    //回复走路
     function  restoreWalk() {
         $boy.removeClass("pauseWalk");
     }
@@ -46,6 +93,7 @@ function BoyWalk() {
     /*用transition做运动*/
     function stratRun(options,runTime) {
         var dfdPlay=$.Deferred();
+        //回复走路
         restoreWalk();
         $boy.transition(options,runTime,'linear',function () {
             dfdPlay.resolve();
@@ -56,7 +104,9 @@ function BoyWalk() {
     /*开始走路*/
     function walkRun(time,disX,disY) {
         time=time||3000;
+        //脚的动作
         slowWalk();
+        //开始走路
         var d1=stratRun({
             'left':disX+'px',
             'top':disY?disY:undefined
@@ -138,39 +188,14 @@ function BoyWalk() {
         },
         takeFlower:function () {
             return takeFlower();
+        },
+        setFlowerWalk:function () {
+            $boy.addClass('slowFlowerWalk');
         }
         
 
 
     }
 }
-/*门开门关*/
-function doorAction(left,right,time) {
-    var door=$('.door');
-    var doorLeft=$('.door_left');
-    var doorRight=$('.door_right');
-    var defer=$.Deferred();
-    /*等待开门*/
-    var count=2;
-    var complete=function () {
-        if(count==1){
-            defer.resolve();
-            return;
-        }
-        count--;
-    };
-    doorLeft.transition({
-        'left':left
-    },time,complete());
-    doorRight.transition({
-        'left':right
-    },time,complete());
-    return defer;
-}
-function openDoor() {
-    return doorAction('-50%','100%',2000);
-}
-function closeDoor() {
-    return doorAction('0%','50%',2000);
-}
+
 /*灯亮灯暗*/

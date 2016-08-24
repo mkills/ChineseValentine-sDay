@@ -1,6 +1,4 @@
-/**
- * Created by xiaochuan on 2016/8/10.
- */
+
     function  swipeDiv(container) {
         /*获取第一个子节点*/
         var element=container.find(":first");

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>女孩位置及水波、星星变化</title>
+    <title>男孩上桥，走到小女孩面前</title>
 
     <link href="css/main.css" rel="stylesheet">
     <link href="css/pageA.css" rel="stylesheet">
@@ -14,7 +14,17 @@
     <!--<script src="js/jquery.transit.min.js"></script>-->
 
     <script src="js/BoyWalk.js"></script>
+<style type="text/css">
+    .button{
 
+        position: absolute;
+        bottom: 0;
+    }
+    button{
+        width: 80px;
+        height: 50px;
+    }
+</style>
 </head>
 <body>
 <div id="content">
@@ -76,14 +86,13 @@
         </li>
     </ul>
 
-   <!-- <div id="boy" class="character"></div>-->
+  <div id="boy" class="character"></div>
     <!--<div class="button">
         <button>点击切换页面</button>
     </div>-->
-    <!--<div class="button">
+    <div class="button">
         <button>开始</button>
-       &lt;!&ndash; <button>关门</button>&ndash;&gt;
-    </div>-->
+    </div>
 </div>
 
 
@@ -91,18 +100,29 @@
 <script type="text/javascript">
     $(function () {
 
-        var container=$("#content");
-        /*容器宽度*/
-        var visualWidth=container.width();
-        var swipe=swipeDiv(container);
-        /*页面滚动到指定的位置*/
-        function scroll(time,proportionX) {
-            var distX=visualWidth*proportionX;
-            swipe.scrollTo(distX,time);
-        }
-        /*固定到第三个页面*/
-        swipe.scrollTo(visualWidth*2,0);
-
+       var girl={
+           elem:$('.girl'),
+           getHeight:function () {
+               return this.elem.height();
+           },
+           setOffset:function () {
+               this.elem.css({
+                   left:visualWidth/2,
+                   top:bridgeY-this.elem.height()
+               });
+           },
+           getOffset:function () {
+               return this.elem.offset();
+           },
+           getWidth:function () {
+               return this.elem.width();
+           }
+       };
+        //修正小女孩位置
+        girl.setOffset();
+        var boy=BoyWalk();
+        boy.setFlowerWalk();
+        
 
 
     });
