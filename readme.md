@@ -1,3 +1,12 @@
+###编写了一个关于情人节的小动画
+   动画包含三个主题场景
+   场景一：男孩走路，并伴有太阳和云彩的动画；
+   场景二：男儿走到花店门口，进去，然后买了花出来，同时有伴随门开门关、灯光变化、小鸟飞过等动画；
+   场景三：星星闪烁，水波流动，男孩拿着花走到桥前，上桥，和小女孩对视，俩人转身，撒花
+
+
+###使用面向接口的编程方式，采用H5+JS+CSS3的混合使用实现整个功能。
+
 ###20160810
 浪漫七夕
 html5+js+css3
@@ -131,3 +140,37 @@ $("button").click(function () {
                     // 第二次走路
                     return boy.walkTo(5000, 0.5);
                 });
+
+
+###20160822
+1.像素px  大写和小写的区别
+2.星星 stars>li  每个li的style宽高是整个屏幕 而不是style属性为空
+
+###20160823
+animation 动画 是一个简写 用于设置六个动画属性
+
+animation          所有动画属性的简写属性，除了 animation-play-state 属性。
+animation-name              规定需要绑定到选择器的keyframe名称 规定 @keyframes 动画的名称。
+animation-duration          time	规定完成动画所花费的时间。默认值是0，意味着没有动画效果。以秒或毫秒计 
+
+animation-timing-function   规定动画的速度曲线  默认是 "ease"。
+							linear	动画从头到尾的速度是相同的。	
+							ease	默认。动画以低速开始，然后加快，在结束前变慢。	
+							ease-in	动画以低速开始。	
+							ease-out	动画以低速结束。	
+							ease-in-out	动画以低速开始和结束。	
+							cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值。
+
+animation-delay             规定在动画开始之前的延迟   默认是 0。
+
+animation-iteration-count   规定动画应该播放的次数       默认是 1。
+							n	定义动画播放次数的数值。	测试
+							infinite	规定动画应该无限次播放。
+
+animation-direction         规定是否应该轮流反响播放动画   默认是 "normal"。
+							normal	    默认值。动画应该正常播放。	
+                            alternate	动画应该轮流反向播放。
+animation-play-state        规定动画是否正在运行或暂停。默认是 "running"。
+animation-fill-mode         规定对象动画时间之外的状态。
+@keyframes 	规定动画。
+
