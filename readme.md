@@ -174,3 +174,12 @@ animation-play-state        规定动画是否正在运行或暂停。默认是 
 animation-fill-mode         规定对象动画时间之外的状态。
 @keyframes 	规定动画。
 
+###logo动画处理
+logo动画处理的原理与rotate是一样的，区别就是logo是2组CSS3的animation动画组成。这里需要注意的，不能同时给一个元素增加2个CSS3的关键帧动画，所以需要一个结束后，在增加下一个，这里需要通过事件监听的方式处理
+
+代码调用部分：
+
+this.elem.addClass('logolightSpeedIn')
+    .on(animationEnd, function() {
+        $(this).addClass('logoshake').off();
+    })
